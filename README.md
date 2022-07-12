@@ -7,7 +7,7 @@
 | name               | string | null: false |
 | email              | string | null: false,unique:true|
 | encrypted_password | string | null: false |
-| birth_date         | string | null: false |
+| birth_date         | date   | null: false |
 | family_name        | string | null: false |
 | first_name         | string | null: false |
 | ruby_family_name   | string | null: false |
@@ -17,48 +17,49 @@
 
 - has_many :items
 - has_one :address
-- has_one :payment
 
 ## items テーブル
 
 | Column              | Type   | Options     |
 | ------------------  | ------ | ----------- |
-| title               | string | null: false |
-| desscription        | text   | null: false |
-| category            | string | null: false |
-| condition           | string | null: false |
-| delivery_charge     | string | null: false |
-| shipping_date       | string | null: false |
-| price               | integer    | null: false |
-| user                | references | null: false,foreign_key: true|
+| title                  | string | null: false |
+| description            | text   | null: false |
+| category_id            | integer | null: false |
+| condition_id           | integer | null: false |
+| delivery_charge_id     | integer | null: false |
+| shipping_date_id       | integer | null: false |
+| area_id                | integer | null: false |
+| price                  | integer    | null: false |
+| user                   | references | null: false,foreign_key: true|
 
 ### Association
 belongs_to: user
 has_one: address
-has_one: payment
+has_one: purchase
 
 
-## payment テーブル
-
+## purchase テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| card_number        | integer | null: false |
-| date_of_expire     | integer | null: false,unique:true|
-| security_code      | integer | null: false |
+| item_id           | string  | null: false |
+| user_id           | string | null: false |
 
 ### Association
-belongs_to: user
+belongs_to:user
+belongs_to:item
+
 
 ## address テーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| post_number        | integer | null: false |
-| prefecters         | string | null: false,unique:true|
-| municipality       |string  | null: false |
-| number             | integer |null,false|
-| building          | string | null: false |
-| phpnnne_number     | string | null: false |
+| post_number        | string  | null: false |
+| area_id            | integer | null: false,unique:true|
+| municipality       | string  | null: false |
+| number             | string  |null,false|
+| building           | string  |
+| phone_number       | string  | null: false |
 
 ### Association
 belongs_to: user
+belongs_to: purchase
