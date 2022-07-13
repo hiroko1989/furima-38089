@@ -28,7 +28,7 @@
 | condition_id           | integer | null: false |
 | delivery_charge_id     | integer | null: false |
 | shipping_date_id       | integer | null: false |
-| area_id                | integer | null: false |
+| prefecture_id          | integer | null: false |
 | price                  | integer    | null: false |
 | user                   | references | null: false,foreign_key: true|
 
@@ -54,10 +54,10 @@ has_one :address
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | post_number        | string  | null: false |
-| prefecture         | integer | null: false |
+| prefecture_id      | integer | null: false |
 | city               | string  | null: false |
 | number             | string  | null, false |
-| building           | string  |foreign_key: true|
+| building           | string  |
 | phone_number       | string  | null: false |
 | user               | references  | null: false,foreign_key: true|
 
