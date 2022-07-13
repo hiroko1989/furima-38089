@@ -16,12 +16,12 @@
 ### Association
 
 - has_many :items
-- has_one :address
+- has_one :purchase
 
 ## items テーブル
 
-| Column              | Type   | Options     |
-| ------------------  | ------ | ----------- |
+| Column                 | Type   | Options     |
+| ------------------     | ------ | ----------- |
 | title                  | string | null: false |
 | description            | text   | null: false |
 | category_id            | integer | null: false |
@@ -34,32 +34,31 @@
 
 ### Association
 belongs_to: user
-has_one: address
 has_one: purchase
 
 
-## purchase テーブル
+## purchases テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| item_id           | string  | null: false |
-| user_id           | string | null: false |
+| item_id           | string  | null: false,foreign_key: true|
+| user_id           | string  | null: false,foreign_key: true|
 
 ### Association
 belongs_to:user
 belongs_to:item
+belongs_to:address
 
 
-## address テーブル
+## addresses テーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | post_number        | string  | null: false |
-| area_id            | integer | null: false,unique:true|
+| area_id            | integer | null: false|
 | municipality       | string  | null: false |
-| number             | string  |null,false|
-| building           | string  |
-| phone_number       | string  | null: false |
+| number             | string  |null,false,foreign_key: true|
+| building           | string  |foreign_key: true|
+| phone_number       | string  | null: false,foreign_key: true|
 
 ### Association
-belongs_to: user
 belongs_to: purchase
