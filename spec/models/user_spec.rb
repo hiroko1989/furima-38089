@@ -31,12 +31,34 @@ require 'rails_helper'
     expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
   end
 
-  it 'passwordが半角英数混同で6文字以上でないと登録できない' do
-    @user.password = 'aaa12'
-    @user.password_confirmation = '00012'
+  it 'passwordが6文字以上でないと登録できない' do
+    @user.password = 'aaaaa'
+    @user.password_confirmation = 'aaaaa'
     @user.valid?
     expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
   end
+
+  it 'passwordは英字のみでは登録できない' do
+    @user.password = 'aaaaaa'
+    @user.password_confirmation = 'aaaaaa'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Password 半角の英字と数字の両方を含めて設定してください')
+  end
+
+  it 'passwordは数字のみでは登録できない' do
+    @user.password = '666666'
+    @user.password_confirmation = '666666'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Password 半角の英字と数字の両方を含めて設定してください')
+  end
+
+  it 'passwordは全角文字では登録できない' do
+    @user.password = 'AAAAAA'
+    @user.password_confirmation = 'AAAAAA'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Password 半角の英字と数字の両方を含めて設定してください')
+  end
+
 
   it '重複したemailが存在する場合は登録できない' do
     @user.save
