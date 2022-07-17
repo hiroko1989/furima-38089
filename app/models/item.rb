@@ -15,17 +15,26 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_date
 
-  validates :title, presence: true
-  validates :description, presence: true
-  validates :image, presence: true
+  with_options presence: true do
+    validates :title, presence: true
+    validates :description, presence: true
+    validates :image, presence: true
+    validates :price, presence: true
+    validates :category_id, presence: true
+    validates :condition_id, presence: true
+    validates :delivery_charge_id, presence: true
+    validates :prefecture_id, presence: true
+    validates :shipping_date_id, presence: true
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  end
 
-
-  #「--」を選択した場合にエラーメッセージが出現
-  validates :category_id, numericality: { other_than: 0 , message: "「--」は選択できません"}
-  validates :condition_id, numericality: { other_than: 0 , message: "「--」は選択できません"}
-  validates :delivery_charge_id, numericality: { other_than: 0 , message: "「--」は選択できません"}
-  validates :prefecture_id, numericality: { other_than: 0 , message: "「--」は選択できません"}
-  validates :shipping_date_id, numericality: { other_than: 0 , message: "「--」は選択できません"}
-
+  #「--」を選択した場合に保存できない
+  with_options numericality: { other_than: 0 } do
+    validates :category_id
+    validates :condition_id
+    validates :delivery_charge_id
+    validates :prefecture_id
+    validates :shipping_date_id
+  end
 
 end
