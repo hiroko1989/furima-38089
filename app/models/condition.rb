@@ -6,7 +6,7 @@ class Condition < ApplicationRecord
     { id: 3, name: '目立った傷や汚れなし' },
     { id: 4, name: 'やや傷や汚れあり' },
     { id: 3, name: '傷や汚れあり' }
-    { id: 3, name: '全体的に状態が悪い' },,
+    { id: 3, name: '全体的に状態が悪い' },
   ]
 
   include ActiveHash::Associations
