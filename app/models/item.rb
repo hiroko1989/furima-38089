@@ -15,4 +15,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_date
 
+  validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
+
+
 end
