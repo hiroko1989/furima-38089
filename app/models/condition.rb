@@ -1,5 +1,5 @@
 class Condition < ApplicationRecord
-  self.date = [
+  self.data = [
     { id: 0, name: '--' },
     { id: 1, name: '新品・未使用' },
     { id: 2, name: '未使用に近い' },
