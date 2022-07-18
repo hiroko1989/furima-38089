@@ -110,7 +110,6 @@ require 'rails_helper'
     expect(@user.errors.full_messages).to include("First name 全角（漢字・ひらがな・カタカナ）で入力してください")
   end
 
-#ここまではテストOK
   it 'family_nameは、全角（漢字・ひらがな・カタカナ）でないと登録できない' do
     @user.family_name = 'hanako'
     @user.valid?

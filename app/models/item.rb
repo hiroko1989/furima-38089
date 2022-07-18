@@ -16,14 +16,14 @@ class Item < ApplicationRecord
   belongs_to :shipping_date
 
   with_options presence: true do
-    validates :title, presence: true
-    validates :description, presence: true
-    validates :image, presence: true
-    validates :category_id, presence: true
-    validates :condition_id, presence: true
-    validates :delivery_charge_id, presence: true
-    validates :prefecture_id, presence: true
-    validates :shipping_date_id, presence: true
+    validates :title
+    validates :description
+    validates :image
+    validates :category_id
+    validates :condition_id
+    validates :delivery_charge_id
+    validates :prefecture_id
+    validates :shipping_date_id
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
     validates :price, numericality: { only_integer: true }
   end
