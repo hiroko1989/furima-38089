@@ -1,4 +1,4 @@
-class OrderForm
+class PurchaseForm
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postcode, :prefecture_id, :city, :block, :building, :phone_number, :token
 
@@ -18,8 +18,8 @@ class OrderForm
   end
 
   def save
-    order = Order.create(user_id: user_id, item_id: item_id)
-    Payment.create(order_id: order.id, postcode: postcode, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number)
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
+    Address.create(order_id: order.id, postcode: postcode, prefecture_id: prefecture_id, city: city, block: block, building: building, phone_number: phone_number)
   end
-  
+
 end
