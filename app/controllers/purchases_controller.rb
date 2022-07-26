@@ -3,6 +3,8 @@ class PurchasesController < ApplicationController
 
   def index
     @purchase_form = PurchaseForm.new
+    #2-6
+
     @item = Item.find(params[:item_id])
 
   end
@@ -26,3 +28,6 @@ class PurchasesController < ApplicationController
   end
 
 end
+
+
+#2-4
