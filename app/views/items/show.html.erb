@@ -9,8 +9,7 @@
     <div class="item-img-content">
       <%= image_tag @item.image.variant(resize: '500x500'),class:"item-box-img" %>
 
-      <% if @items.present? %>
-      <%# if @item.purchase != nil %>
+      <% if @item.purchase != nil %>
        <div class="sold-out">
         <span>Sold Out!!</span>
        </div>
@@ -27,17 +26,23 @@
       </span>
     </div>
 
+  <%# ログイン中であれば表示 %>
   <% if user_signed_in? %> 
-    <% if user_signed_in? && current_user.id == @item.user_id %>
+
+    <%# 出品者+未購入品であれば、編集・削除を表示 %>
+    <% if current_user.id == @item.user_id && @item.purchase.nil? %> 
      <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
      <p class="or-text">or</p>
      <%= link_to "削除", item_path(@item), method: :delete, class:"item-destroy" %>
 
-     <%# 商品が売れていない場合はこちらを表示しましょう %>
-     <% else %>
+     <%# 購入済であればSoldoutを表示 %>
+    <% elsif @item.purchase.present? %>
+      <%= link_to "Sold Out",item_path(@item),class:"disabled-button bold" %>
+
+    <%# 出品者以外+未購入品であれば、購入画面を表示 %>
+    <% else %>
       <%= link_to "購入画面に進む", item_purchases_path(@item) ,class:"item-red-btn"%>
-     <%# //商品が売れていない場合はこちらを表示しましょう %>
-     <% end%>
+    <% end%>
   <% end %>
 
 
