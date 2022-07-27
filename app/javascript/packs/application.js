@@ -7,6 +7,8 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../item_price")
+
+//card.jsを読み込み
 require("../card");
 
 

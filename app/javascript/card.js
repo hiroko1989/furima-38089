@@ -8,6 +8,7 @@ const pay = () => {
 
     e.preventDefault();
 
+    //フォームの情報を取得
     const formResult = document.getElementById("charge-form");
     const formData = new FormData(formResult);
 
@@ -18,6 +19,7 @@ const pay = () => {
       cvc: formData.get("purchase_form[cvc]"),
     };
 
+    //トークンの値をフォームに含める
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;
@@ -26,15 +28,17 @@ const pay = () => {
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
 
+      //クレジットカード情報を削除
       document.getElementById("card-number").removeAttribute("name");
       document.getElementById("card-exp-month").removeAttribute("name");
       document.getElementById("card-exp-year").removeAttribute("name");
       document.getElementById("card-cvc").removeAttribute("name");
 
-
+      //フォームの情報をサーバーサイドに送信
       document.getElementById("charge-form").submit();
     });
   });
 };
 
+//card.jsが読み込まれているか確認
 window.addEventListener("load", pay);
