@@ -98,8 +98,8 @@ RSpec.describe PurchaseForm, type: :model do
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号にハイフンがあると保存できないこと' do
-        @purchase_form.phone_number = '123 - 1234 - 1234'
+      it '電話番号に半角数字以外があると保存できないこと' do
+        @purchase_form.phone_number = '123 * 1234 - 1234'
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include('Phone number is invalid')
       end
