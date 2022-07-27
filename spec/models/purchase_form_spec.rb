@@ -66,7 +66,7 @@ RSpec.describe PurchaseForm, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @purchase_form.post_number = nil
         @purchase_form.valid?
-        expect(@purchase_form.errors.full_messages).to include("Post number can't be blank", 'Post number is invalid. Include hyphen(-)')
+        expect(@purchase_form.errors.full_messages).to include("Post number can't be blank")
       end
       it '郵便番号にハイフンがないと保存できないこと' do
         @purchase_form.post_number = 1_234_567
